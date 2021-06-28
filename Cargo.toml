@@ -25,6 +25,10 @@ path = "src/timer.rs"
 name = "crud"
 path = "src/crud.rs"
 
+[[bin]]
+name = "circles"
+path = "src/circles.rs"
+
 [dependencies]
 fltk = "1.0.19"
 chrono = "0.4.19"
