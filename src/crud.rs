@@ -83,7 +83,8 @@ fn main() {
         "Lovelace, Ada".to_string(),
         "Turing, Alan".to_string(),
     ];
-    sender.send(Message::Filter);
+    
+    filter(&filter_input, &mut &mut list_browser, &model);
 
     let formatted_name = || format!("{}, {}", surname_input.value(), name_input.value());
     win.set_size(
@@ -107,13 +108,8 @@ fn main() {
                 sender.send(Message::Filter);
             }
             Some(Message::Filter) => {
-                let prefix = filter_input.value().to_lowercase();
-                list_browser.clear();
-                for item in &model {
-                    if item.to_lowercase().starts_with(&prefix) {
-                        list_browser.add(item);
-                    }
-                }
+                filter(&filter_input, &mut list_browser, &model);
+
                 sender.send(Message::Select)
             }
             Some(Message::Select) => {
@@ -132,6 +128,16 @@ fn main() {
                 sender.send(Message::Filter);
             }
             None => {}
+        }
+    }
+}
+
+fn filter(filter_input: &Input, list_browser: &mut HoldBrowser, model: &Vec<String>) {
+    let prefix = filter_input.value().to_lowercase();
+    list_browser.clear();
+    for item in model {
+        if item.to_lowercase().starts_with(&prefix) {
+            list_browser.add(item);
         }
     }
 }

@@ -42,3 +42,11 @@ $ cargo run --bin crud
 ```
 
 ![](thumbs/crud.png)
+
+* Circles
+
+```
+$ cargo run --bin circles
+```
+
+![](thumbs/circles.png)
