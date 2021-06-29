@@ -247,10 +247,11 @@ fn main() {
             }
             Some(Message::AdjustOpened) => {
                 model.save();
-                if canvas.selected().is_none() {
-                    continue;
-                }
-                let (pos, radius) = canvas.selected().unwrap();
+
+                let (pos, radius) = match canvas.selected() {
+                    Some(pos) => pos,
+                    None => continue,
+                };
                 diameter_slider.set_label(&format!("Adjust diameter of circle at {:?}.", pos));
                 diameter_slider.set_value(f64::from(radius));
                 adjust_window.show();
